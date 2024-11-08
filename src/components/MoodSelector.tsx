@@ -30,11 +30,6 @@ export function MoodSelector({ onMoodSelect }: MoodSelectorProps) {
           >
             <Music className={`w-6 h-6 md:w-8 md:h-8 text-mood-${mood}`} />
             <span className="capitalize font-medium text-sm md:text-base">{mood}</span>
-            <div className="flex-1 flex items-center">
-              <p className="text-xs md:text-sm text-muted-foreground line-clamp-3 text-center">
-                {moodDescriptions[mood]}
-              </p>
-            </div>
           </Button>
         ))}
       </div>
