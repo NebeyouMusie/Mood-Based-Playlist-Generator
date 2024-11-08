@@ -23,14 +23,16 @@ export function MoodSelector({ onMoodSelect }: MoodSelectorProps) {
           <Button
             key={mood}
             onClick={() => handleMoodSelect(mood)}
-            className={`h-24 md:h-32 glass-card flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105 ${
+            className={`h-auto min-h-[120px] md:min-h-[160px] glass-card flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105 p-4 ${
               selectedMood === mood ? `ring-2 ring-mood-${mood}` : ""
             }`}
             variant="ghost"
           >
             <Music className={`w-6 h-6 md:w-8 md:h-8 text-mood-${mood}`} />
             <span className="capitalize font-medium text-sm md:text-base">{mood}</span>
-            <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 px-2">{moodDescriptions[mood]}</p>
+            <p className="text-xs md:text-sm text-muted-foreground overflow-hidden line-clamp-3 px-2 text-center">
+              {moodDescriptions[mood]}
+            </p>
           </Button>
         ))}
       </div>
