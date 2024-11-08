@@ -2,14 +2,28 @@ import { useState } from "react";
 import { MoodSelector } from "@/components/MoodSelector";
 import { PlaylistDisplay } from "@/components/PlaylistDisplay";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Mood, mockPlaylists } from "@/lib/playlist-data";
-import { Music } from "lucide-react";
+import { Mood, getRandomSongs } from "@/lib/playlist-data";
+import { Music, RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
-  const [selectedMoodSongs, setSelectedMoodSongs] = useState(mockPlaylists.happy);
+  const [selectedMood, setSelectedMood] = useState<Mood>("happy");
+  const [selectedMoodSongs, setSelectedMoodSongs] = useState(getRandomSongs("happy"));
+  const { toast } = useToast();
 
   const handleMoodSelect = (mood: Mood) => {
-    setSelectedMoodSongs(mockPlaylists[mood]);
+    setSelectedMood(mood);
+    setSelectedMoodSongs(getRandomSongs(mood));
+  };
+
+  const handleRefresh = () => {
+    setSelectedMoodSongs(getRandomSongs(selectedMood));
+    toast({
+      title: "Playlist Refreshed!",
+      description: "We've shuffled the songs for you.",
+      duration: 2000,
+    });
   };
 
   return (
@@ -28,6 +42,17 @@ const Index = () => {
           </p>
         </div>
         <MoodSelector onMoodSelect={handleMoodSelect} />
+        <div className="flex justify-end mb-4">
+          <Button
+            onClick={handleRefresh}
+            variant="outline"
+            size="sm"
+            className="gap-2"
+          >
+            <RefreshCw className="h-4 w-4" />
+            Shuffle Playlist
+          </Button>
+        </div>
         <PlaylistDisplay songs={selectedMoodSongs} />
       </div>
     </div>
