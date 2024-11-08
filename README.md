@@ -1,4 +1,4 @@
-# Welcome to your GPT Engineer project
+# Mood-Based Playlist Generator
 
 ## Project info
 
